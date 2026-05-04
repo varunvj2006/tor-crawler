@@ -278,7 +278,6 @@ IMPORTANT_QUERY_TERMS = set(tokenize(query_lc)) | set(tokenize(" ".join(GENERIC_
 
 
 def lexical_similarity(text: str) -> float:
-    """Simple cosine similarity over token counts. Returns roughly 0..1."""
     tokens = tokenize(text)
     if not tokens or not QUERY_COUNTER:
         return 0.0
@@ -293,7 +292,6 @@ def lexical_similarity(text: str) -> float:
 
     score = dot / (norm_a * norm_b)
 
-    # Small boost for exact important terms.
     important_hits = sum(1 for t in IMPORTANT_QUERY_TERMS if t in counter)
     score += min(important_hits * 0.015, 0.15)
 
@@ -777,12 +775,8 @@ def process_url(url: str, parent_url: str, anchor_text: str, allow_external_link
             result["records"].append({
                 "prompt": query_input,
                 "url": url,
-                "parent_url": parent_url,
                 "anchor_text": anchor_text,
                 "title": title,
-                "score": round(float(final_score), 4),
-                "base_similarity": round(float(base_score), 4),
-                "scoring_mode": "ollama" if OLLAMA_AVAILABLE else "lexical",
                 "prompt_present": prompt_matches(f"{url} {title} {chunk}"),
                 "content": chunk,
             })
