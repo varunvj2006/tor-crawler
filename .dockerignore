@@ -1,0 +1,6 @@
+venv
+__pycache__
+*.pyc
+.vscode
+crawler_runs
+crawler_data.jsonl
