@@ -52,6 +52,8 @@ Each line is a JSON object:
   "title": "...",
   "content": "relevant extracted text..."
 }
+
+
 How It Works
 Search engines provide initial seed URLs
 Pages are crawled and parsed
