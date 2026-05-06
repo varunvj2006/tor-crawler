@@ -93,3 +93,29 @@ tor
 Then run:
 $env:USE_TOR="1"
 python testscraper.py
+
+
+To use docker:
+
+run this first:
+
+ollama serve
+
+Windows PowerShell:
+docker run --rm -it `
+  -e CRAWLER_PROMPT="secure boot" `
+  -e USE_OLLAMA=1 `
+  -v "${PWD}/crawler_runs:/app/crawler_runs" `
+  ai-crawler
+
+Linux/MacOS:
+docker run --rm -it \
+  -e CRAWLER_PROMPT="secure boot" \
+  -e USE_OLLAMA=1 \
+  -v "$PWD/crawler_runs:/app/crawler_runs" \
+  ai-crawler
+
+To change the prompt for your crawl, change the content inside CRAWLER_PROMPT="[your desired prompt]"
+
+
+Also ensure that your docker is running first!!
